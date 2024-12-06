@@ -1,16 +1,16 @@
     const express=require('express');
     const notesRoutes=require('./router/notesRoutes');
-    const fileUpload = require('express-fileupload');
+    //const fileUpload = require('express-fileupload');
     const bodyParser=require('body-parser');
     const app=express();
     const port=4000;
     app.use(bodyParser.json({extended:false}));
-    app.use(fileUpload({
-        limits: {
-            fileSize: 10000000, // Around 10MB
-        },
-        abortOnLimit: true,
-    }));
+    // app.use(fileUpload({
+    //     limits: {
+    //         fileSize: 10000000, // Around 10MB
+    //     },
+    //     abortOnLimit: true,
+    // }));
     app.use(express.static('public'));
     app.use('/',notesRoutes);
 

@@ -1,7 +1,10 @@
 const express=require('express');
 const router=express.Router();
 const notesController=require('../controllers/notes');
-router.post('/api/notes',notesController.addNotes);
+
+const upload=require('../fileUploader/multer');
+
+router.post('/api/notes',upload.single('image'),notesController.addNotes);
 router.get('/api/notes',notesController.getNotes);
 router.get('/api/notes/:noteId',notesController.getNoteById);
 router.put('/api/notes/:noteId',notesController.updateNoteById);

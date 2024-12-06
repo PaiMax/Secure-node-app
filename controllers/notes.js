@@ -1,21 +1,28 @@
 const loki = require("lokijs")
 const path = require('path');
+const { all } = require("../router/notesRoutes");
+
 
 var db = new loki('notes.db');
 var notes = db.addCollection('notes');
 var id = 1;
+
+
 exports.addNotes=async(req,res,next)=>{
     if (!req.body.name || !req.body.data) {
         return res.status(400).send("Invalid input");
     }
-    const { image } = req.files;   //EXTRACT THE IMAGE FROM THE REQUEST
-    if (!image){let targetFolder=null;}
-    else{
-        targetFolder = path.join('./public');
-        targetPath = path.join(targetFolder, image.name);
-        image.mv(targetPath);
+    // const { image } = req.files;   //EXTRACT THE IMAGE FROM THE REQUEST
+    // targetFolder = path.join('./public');
+    // targetPath = path.join(targetFolder, image.name);
+    // image.mv(targetPath);
+    if(!req.file){
+        res.status(400).send("NO file uploaded");
     }
-    notes.insert({noteId:id, name : req.body.name ,note:req.body.data,ImagePath:targetPath});
+
+    
+    
+    notes.insert({noteId:id, name : req.body.name ,note:req.body.data,imageFilePath:req.file.path});
     id++;
     db.saveDatabase();
     res.send("added succesfully")
@@ -23,29 +30,22 @@ exports.addNotes=async(req,res,next)=>{
 }
 
 exports.getNotes=async(req,res,next)=>{
-    res.send(notes.find());
+    const targetFolder='C:\Users\nishw\OneDrive\Desktop\Secure-node-app\public';
+    const allNotes=notes.find();
+
+    const notesWithImage=allNotes.map(note=>{
+        if(note.imageName)note.imageUrl=path.join(targetFolder,note.imageName);
+        return note;
+
+    })
+
+    res.json(notesWithImage);
 }
 
 exports.getNoteById=async(req,res,next)=>{
     res.send(notes.findOne({ noteId: parseInt(req.params.noteId) }));
 }
 
-// exports.updateNoteById = async (req, res, next) => {
-//     try {
-//         const result = await notes.update(
-//             { noteId: parseInt(req.params.noteId) }, // query to find the document
-//             { $set: { name: req.body.name, note: req.body.data } } // update operation
-//         );
-
-//         if (result.modifiedCount === 0) {
-//             return res.status(404).send("Note not found or no changes made.");
-//         }
-
-//         res.send("success");
-//     } catch (err) {
-//         next(err); // Pass error to the next middleware
-//     }
-// }
 exports.updateNoteById = async (req, res, next) => {
     try {
         const note = notes.findOne({ noteId: parseInt(req.params.noteId) });// Find the document in the LokiJS collection
@@ -83,16 +83,3 @@ exports.deleteById=async (req,res,next) => {
 }
 
 
-exports.imageUpload=async(req,res)=>{
-    const { image } = req.files;
-    const targetFolder = path.join('./public');
-    const targetPath = path.join(targetFolder, image.name);
-
-    console.log(req.files);
-    image.mv(targetPath);
-
-    // All good
-    res.sendStatus(200);
-
-
-}
