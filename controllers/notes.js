@@ -1,12 +1,12 @@
 const loki = require("lokijs")
 const path = require('path');
+const crypto=require('crypto-js'); 
 const fs=require('fs');
 const { all } = require("../router/notesRoutes");
 var db = new loki('notes.db');
 var notes = db.addCollection('notes');
-const crypto=require('crypto-js');
-const algorithm="aes-256-cbc";
-const key="Niswhwal@123"
+const algorithm="aes-256-cbc";  //algo for increption and decrytpion
+const key="Niswhwal@123" //private key
 var id = 1;   //global variable for the id of each note
 
 function encrupt(data){  //increption function
@@ -39,6 +39,7 @@ exports.addNotes=async(req,res,next)=>{       //this will add the notes in to th
         res.status(400).send("NO file uploaded");
     }
     console.log("file path",req.file.path);
+    console.log("request body", req.body);
 
     const encrypteData=encrupt(req.body.data);
     const encryptImagePath=encrupt(req.file.path);
@@ -51,14 +52,14 @@ exports.addNotes=async(req,res,next)=>{       //this will add the notes in to th
 
 exports.getNotes=async(req,res,next)=>{   //this will return all the notes in the memory
     const allNotes=notes.find();
-    const notesWithImage=await Promise.all( allNotes.map((note)=>{    //this will wait till all the data decrypted successfully
+    const notesWithImage=await Promise.all( allNotes.map((note)=>{
+        let obj;    //this will wait till all the data decrypted successfully
         if(note.imageFilePath){
             const filePath=decrypt(note.imageFilePath);
             const data=decrypt(note.note);
-            note.imageFilePath=filePath;
-            note.note=data;
+            obj={...note,imageFilePath:filePath,note:data};
         }
-        return note;
+        return obj;
 
     }))
    
@@ -73,12 +74,18 @@ exports.getNotes=async(req,res,next)=>{   //this will return all the notes in th
 
 exports.getNoteById=async(req,res,next)=>{
     let data=notes.findOne({ noteId: parseInt(req.params.noteId) });
+    console.log("dataa",data);
     if(!data){
         res.send("No notes found with given Id");
         return;
     }
+    console.log("file path",data.imageFilePath);
+    console.log("decryptData",data.note);
     const filePath=decrypt(data.imageFilePath);
     const decryptData=decrypt(data.note);
+    console.log("file path",filePath);
+    console.log("decryptData",decryptData);
+
     data.imageFilePath=filePath;
     data.note=decryptData;
     res.send(data);
@@ -134,5 +141,8 @@ exports.deleteById=async (req,res,next) => {
     }
     
 }
+
+
+
 
 
