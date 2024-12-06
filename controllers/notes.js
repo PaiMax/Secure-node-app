@@ -1,4 +1,5 @@
 const loki = require("lokijs")
+const path = require('path');
 
 var db = new loki('notes.db');
 var notes = db.addCollection('notes');
@@ -7,7 +8,14 @@ exports.addNotes=async(req,res,next)=>{
     if (!req.body.name || !req.body.data) {
         return res.status(400).send("Invalid input");
     }
-    notes.insert({noteId:id, name : req.body.name ,note:req.body.data});
+    const { image } = req.files;   //EXTRACT THE IMAGE FROM THE REQUEST
+    if (!image){let targetFolder=null;}
+    else{
+        targetFolder = path.join('./public');
+        targetPath = path.join(targetFolder, image.name);
+        image.mv(targetPath);
+    }
+    notes.insert({noteId:id, name : req.body.name ,note:req.body.data,ImagePath:targetPath});
     id++;
     db.saveDatabase();
     res.send("added succesfully")
@@ -72,4 +80,19 @@ exports.deleteById=async (req,res,next) => {
         console.log(err);
     }
     
+}
+
+
+exports.imageUpload=async(req,res)=>{
+    const { image } = req.files;
+    const targetFolder = path.join('./public');
+    const targetPath = path.join(targetFolder, image.name);
+
+    console.log(req.files);
+    image.mv(targetPath);
+
+    // All good
+    res.sendStatus(200);
+
+
 }
