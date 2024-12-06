@@ -119,3 +119,51 @@
 2024-12-06T16:27:20.849Z [info]: decyrpted data :this is my second5
 2024-12-06T16:27:20.850Z [info]: decyrpted data :C:\Users\nishw\OneDrive\Desktop\Secure-node-app\uploads\1733502366532-whats.jpeg
 2024-12-06T16:27:20.851Z [info]: decyrpted data :this is my second5
+2024-12-06T18:38:50.097Z [info]: GET:/api/notes: Enter
+2024-12-06T18:38:50.110Z [error]: Response Sent :Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+2024-12-06T18:38:50.137Z [info]: GET:/api/notes: Enter
+2024-12-06T18:38:50.140Z [error]: Response Sent :Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+2024-12-06T18:40:55.509Z [info]: GET:/api/notes: Enter
+2024-12-06T18:40:55.540Z [info]: GET:/api/notes: Enter
+2024-12-06T18:42:10.738Z [info]: GET:/api/notes: Enter
+2024-12-06T18:42:10.768Z [info]: GET:/api/notes: Enter
+2024-12-06T18:43:15.688Z [info]: GET:/api/notes: Enter
+2024-12-06T18:43:15.715Z [info]: GET:/api/notes: Enter
+2024-12-06T18:44:16.397Z [info]: GET:/api/notes: Enter
+2024-12-06T18:44:16.427Z [info]: GET:/api/notes: Enter
+2024-12-06T18:44:33.638Z [info]: GET:/api/notes: Enter
+2024-12-06T18:44:33.668Z [info]: GET:/api/notes: Enter
+2024-12-06T18:44:57.797Z [info]: GET:/api/notes: Enter
+2024-12-06T18:44:57.827Z [info]: GET:/api/notes: Enter
+2024-12-06T18:45:43.801Z [info]: GET:/api/notes: Enter
+2024-12-06T18:45:43.833Z [info]: GET:/api/notes: Enter
+2024-12-06T19:15:12.687Z [info]: GET:/api/notes: Enter
+2024-12-06T19:15:12.710Z [info]: GET:/api/notes: Enter
+2024-12-06T20:32:02.799Z [info]: POST:/api/notes: Enter
+2024-12-06T20:32:52.866Z [info]: POST:/api/notes: Enter
+2024-12-06T20:33:35.637Z [info]: POST:/api/notes: Enter
+2024-12-06T20:33:35.640Z [info]: request body {"name":"Test Note","data":"This is a test note","image":"publicwhats.jpeg"}
+2024-12-06T20:33:35.649Z [info]: ENCRYPTED data :U2FsdGVkX18vafSac2+ByZipEfrEzZ4iqbo15j5AF7fJ1VrA29mWxcsGCm1LKAdq
+2024-12-06T20:34:18.604Z [info]: POST:/api/notes: Enter
+2024-12-06T20:34:18.606Z [info]: request body {"name":"Test Note","data":"This is a test note","image":"publicwhats.jpeg"}
+2024-12-06T20:34:18.609Z [info]: ENCRYPTED data :U2FsdGVkX1+FemZvuqxU5h4yNRkV3LTvDR48kp5KWPVdI4vmBrL5t+Ukx+MJqGMD
+2024-12-06T20:34:56.223Z [info]: POST:/api/notes: Enter
+2024-12-06T20:34:56.225Z [info]: request body {"name":"Test Note","data":"This is a test note","image":"publicwhats.jpeg"}
+2024-12-06T20:34:56.228Z [info]: ENCRYPTED data :U2FsdGVkX18Ah9xucHV9Z/20KJNNAhFiDJngmtXlJXcNyrk0qYD6+kZfeWDnFlDZ
+2024-12-06T20:35:18.211Z [info]: POST:/api/notes: Enter
+2024-12-06T20:35:18.212Z [info]: request body {"name":"Test Note","data":"This is a test note","image":"publicwhats.jpeg"}
+2024-12-06T20:35:18.216Z [info]: ENCRYPTED data :U2FsdGVkX19fee3AssEhm3kvMJFH1ZNCXfiIX8wVVt4Bfel7Icm7lgng9+/2UpcB
+2024-12-06T20:35:44.876Z [info]: POST:/api/notes: Enter
+2024-12-06T20:35:44.878Z [info]: request body {"name":"Test Note","data":"This is a test note","image":"publicwhats.jpeg"}
+2024-12-06T20:35:44.882Z [info]: ENCRYPTED data :U2FsdGVkX1/YSM1Fsqm7MXUXjx5uNrHk4Iv/yGKIWAr3vnj1EsguevckWFzPcW+S
+2024-12-06T20:37:20.372Z [info]: POST:/api/notes: Enter
+2024-12-06T20:51:32.712Z [info]: POST:/api/notes: Enter
+2024-12-06T20:56:37.195Z [info]: POST:/api/login: Enter
+2024-12-06T20:56:37.197Z [info]: resposne sent : please provide the username
+2024-12-06T20:58:23.811Z [info]: POST:/api/login: Enter
+2024-12-06T20:58:23.813Z [info]: resposne sent : please provide the username
+2024-12-06T21:00:40.331Z [info]: POST:/api/login: Enter
+2024-12-06T21:00:40.333Z [info]: resposne sent : please provide the username
+2024-12-06T21:02:06.898Z [info]: POST:/api/login: Enter
+2024-12-06T21:02:06.900Z [info]: resposne sent : please provide the username
+2024-12-06T21:02:06.917Z [info]: POST:/api/login: Enter

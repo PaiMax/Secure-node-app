@@ -1,5 +1,6 @@
 const jwt=require('jsonwebtoken');
 const secret="Nidhwaal#2323"
+const logger = require('../utility/logger');
 
 exports.setToken=(user)=>{
     return jwt.sign({
@@ -9,7 +10,6 @@ exports.setToken=(user)=>{
 }
 
 exports.verifyToken=(req,res,next)=>{
-    console.log(req.headers.token);
     const token = req.headers.token;
     if(!token)return res.status(401).json({ message: 'Access denied. No token provided.' });
     try{
@@ -19,6 +19,7 @@ exports.verifyToken=(req,res,next)=>{
 
     }
     catch(err){
+        logger.error(`Response Sent :${err}`);
         res.status(403).json({ message: 'Invalid or expired token.' });
 
     }
