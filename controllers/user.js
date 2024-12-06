@@ -1,4 +1,4 @@
-const{setToken}=require('../authorization/middleware');
+const{setToken}=require('../middleware/auth');
 
 exports.loginUser=async(req,res,next)=>{ 
     if(!req.body.name){
