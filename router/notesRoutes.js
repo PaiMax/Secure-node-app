@@ -9,6 +9,4 @@ router.get('/api/notes',notesController.getNotes);
 router.get('/api/notes/:noteId',notesController.getNoteById);
 router.put('/api/notes/:noteId',upload.single('image'),notesController.updateNoteById);
 router.delete('/api/notes/:noteId',notesController.deleteById);
-//router.post('/api/upload',notesController.imageUpload);
-
 module.exports=router;

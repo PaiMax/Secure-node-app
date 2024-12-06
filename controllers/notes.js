@@ -7,59 +7,34 @@ var notes = db.addCollection('notes');
 const crypto=require('crypto-js');
 const algorithm="aes-256-cbc";
 const key="Niswhwal@123"
+var id = 1;   //global variable for the id of each note
 
-
-var id = 1;
-
-function encrupt(data){
-    
-    //encryption
-    // const cipher=crypto.createCipheriv(algorithm,key,iv);
-    // let encyrpt=cipher.update(data,'utf-8','hex');
-    // encyrpt+=cipher.final('hex');
+function encrupt(data){  //increption function
     const encrypted = crypto.AES.encrypt(data, key).toString();
     console.log("ENCRYPTED",encrypted);
     return encrypted;
 }
 
-function decrypt(encrypted){
-    // return new Promise((res,rej)=>{
-        try{
-            const decrypted = crypto.AES.decrypt(encrypted, key).toString(crypto.enc.Utf8);
-            console.log(decrypted);
-           //res(decrypted);
-           return decrypted;
-            
+function decrypt(encrypted){     //decryption function
+    try{
+        const decrypted = crypto.AES.decrypt(encrypted, key).toString(crypto.enc.Utf8);
+        console.log(decrypted);
+        return decrypted;
+    }
+    catch(err){
+        console.log(err);
+        return err;
 
         }
-        catch(err){
-            console.log(err);
-            //rej(err);
-            return err;
-
-        }
-    // })
-    // const decipher=crypto.createDecipheriv(algorithm,key,iv);
-    // let decrypted=decipher.update(encrypted,"hex","utf-8");
-    // decrypted+=decipher.final('utf-8');
-    // console.log(decrypted);
-    
-    
-
-
-}
+  }
 
 
 
 
-exports.addNotes=async(req,res,next)=>{
+exports.addNotes=async(req,res,next)=>{       //this will add the notes in to the in memory db
     if (!req.body.name || !req.body.data) {
         return res.status(400).send("Invalid input");
     }
-    // const { image } = req.files;   //EXTRACT THE IMAGE FROM THE REQUEST
-    // targetFolder = path.join('./public');
-    // targetPath = path.join(targetFolder, image.name);
-    // image.mv(targetPath);
     if(!req.file){
         res.status(400).send("NO file uploaded");
     }
@@ -74,13 +49,10 @@ exports.addNotes=async(req,res,next)=>{
 
 }
 
-exports.getNotes=async(req,res,next)=>{
-    // const targetFolder='C:\Users\nishw\OneDrive\Desktop\Secure-node-app\public';
+exports.getNotes=async(req,res,next)=>{   //this will return all the notes in the memory
     const allNotes=notes.find();
-
-    const notesWithImage=await Promise.all( allNotes.map((note)=>{
+    const notesWithImage=await Promise.all( allNotes.map((note)=>{    //this will wait till all the data decrypted successfully
         if(note.imageFilePath){
-            
             const filePath=decrypt(note.imageFilePath);
             const data=decrypt(note.note);
             note.imageFilePath=filePath;
@@ -117,12 +89,12 @@ exports.getNoteById=async(req,res,next)=>{
 
 exports.updateNoteById = async (req, res, next) => {
     try {
-        const note = notes.findOne({ noteId: parseInt(req.params.noteId) });// Find the document in the LokiJS collection
+        const note = notes.findOne({ noteId: parseInt(req.params.noteId) });// find the document in the LokiJS collection
         if (!note) {
             return res.status(404).send("Note not found");
         }
         
-        // Update the fields of the retrieved document
+        // update the fields of the retrieved document
         const encrypteData=encrupt(req.body.data);
         note.name = req.body.name;
         note.note = encrypteData;
@@ -149,12 +121,12 @@ exports.updateNoteById = async (req, res, next) => {
 
 exports.deleteById=async (req,res,next) => {
     try{
-        const note=notes.findOne({noteId:parseInt(req.params.noteId) });
+        const note=notes.findOne({noteId:parseInt(req.params.noteId) });   //find the note in the local db
         if(!note){
             return res.status(404).send("Note not found");
         }
-        notes.remove(note);
-
+        notes.remove(note);    //removing the node 
+ 
         res.send("note deleted successfully");
     }
     catch(err){

@@ -22,8 +22,6 @@ const fileFilterConfig = function(req, file, cb) {
 	}
 };
 
-
-
 const upload = multer({
 	// applying storage and file filter
 	storage: storageConfig,
