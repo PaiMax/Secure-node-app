@@ -2,9 +2,7 @@ const multer = require("multer");
 const path = require("node:path");
 
 const storageConfig = multer.diskStorage({
-	// destinations is uploads folder 
-	// under the project directory
-	destination: path.join(__dirname, "../uploads"),
+	destination: path.join(__dirname, "../uploads"),    // destinations is uploads folder  under the project directory
 	filename: (req, file, res) => {
 		// file name is prepended with current time
 		// in milliseconds to handle duplicate file names
@@ -16,8 +14,7 @@ const storageConfig = multer.diskStorage({
 const fileFilterConfig = function(req, file, cb) {
 	if (file.mimetype === "image/jpeg"
 		|| file.mimetype === "image/png") {
-		// calling callback with true
-		// as mimetype of file is image
+		
 		cb(null, true);
 	} else {
 		// false to indicate not to store the file
@@ -25,7 +22,7 @@ const fileFilterConfig = function(req, file, cb) {
 	}
 };
 
-// creating multer object for storing
+
 
 const upload = multer({
 	// applying storage and file filter
