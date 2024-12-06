@@ -1,6 +1,20 @@
 {
   "dependencies": {
+    "body-parser": "^1.20.3",
     "express": "^4.21.1",
+    "lokijs": "^1.5.12",
+    "lowdb": "^7.0.1",
     "nodemon": "^3.1.7"
-  }
+  },
+  "name": "secure-node-app",
+  "version": "1.0.0",
+  "description": "notes app",
+  "main": "notes.js",
+  "devDependencies": {},
+  "scripts": {
+    "start":"notes.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
 }
