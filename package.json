@@ -20,7 +20,7 @@
   "description": "notes app",
   "main": "notes.js",
   "scripts": {
-    "start": "notes.js",
+    "start": "nodemon notes.js",
     "test": "jest"
   },
   "author": "",
